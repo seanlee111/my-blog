@@ -1,9 +1,10 @@
 import { createClient } from "@supabase/supabase-js";
 
 const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,      // ← 非空断言
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!  // ← 非空断言
 );
+
 
 export default async function Home() {
   const { data: posts } = await supabase.from("posts").select("*").order("created_at", { ascending: false });
